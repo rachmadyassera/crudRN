@@ -86,7 +86,23 @@
         // getData();
         
       }, []);
-      
+
+          
+      //method deletePost
+      const deletePost = async id => {
+        //delete with api
+        await Api.delete(`/api/posts/${id}`).then(() => {
+          //call method "fetchDataPosts"
+          fetchDataPosts();
+          //show toast
+          ToastAndroid.show('Post Deleted Successfully!', ToastAndroid.LONG);
+
+          
+          //redirect to home
+          navigation.push('PostIndex');
+        });
+      };
+
 
     return (
       <>
@@ -122,7 +138,7 @@
                       </TouchableOpacity>
                       <TouchableOpacity
                       style={styles.button}
-                      onPress={() => {}}>
+                      onPress={() => deletePost(post.id)}>
                       <Text style={styles.buttonText}>Delete</Text>
                       </TouchableOpacity>
                   </View>
